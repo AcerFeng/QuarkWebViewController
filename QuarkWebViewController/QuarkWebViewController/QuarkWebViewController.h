@@ -17,5 +17,7 @@ typedef  NS_ENUM(NSInteger , JPWebViewType){
 
 @import VasSonic;
 @interface QuarkWebViewController : UIViewController
+@property (nonatomic,assign)long long clickTime;
+@property (nonatomic,strong)JSContext *jscontext;
 - (instancetype)initWith:(JPWebViewType)webViewType url:(NSString *)url;
 @end

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		66C33EBE1FCBF3C7006357F7 /* QuarkWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */; };
+		66C33ECB1FCC43E4006357F7 /* SonicJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C33EC81FCC43E4006357F7 /* SonicJSContext.m */; };
+		66C33ECE1FCC4428006357F7 /* SonicOfflineCacheConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C33ECD1FCC4428006357F7 /* SonicOfflineCacheConnection.m */; };
 		66F535901FCBEA9400ED0060 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5358F1FCBEA9400ED0060 /* AppDelegate.m */; };
 		66F535931FCBEA9400ED0060 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F535921FCBEA9400ED0060 /* ViewController.m */; };
 		66F535981FCBEA9400ED0060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F535971FCBEA9400ED0060 /* Assets.xcassets */; };
@@ -40,6 +42,10 @@
 		37DC5745FF85332993F338C9 /* Pods_QuarkWebViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuarkWebViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C33EBC1FCBF3C7006357F7 /* QuarkWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuarkWebViewController.h; sourceTree = "<group>"; };
 		66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuarkWebViewController.m; sourceTree = "<group>"; };
+		66C33EC81FCC43E4006357F7 /* SonicJSContext.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SonicJSContext.m; sourceTree = "<group>"; };
+		66C33EC91FCC43E4006357F7 /* SonicJSContext.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SonicJSContext.h; sourceTree = "<group>"; };
+		66C33ECC1FCC4428006357F7 /* SonicOfflineCacheConnection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SonicOfflineCacheConnection.h; sourceTree = "<group>"; };
+		66C33ECD1FCC4428006357F7 /* SonicOfflineCacheConnection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SonicOfflineCacheConnection.m; sourceTree = "<group>"; };
 		66F5358B1FCBEA9400ED0060 /* QuarkWebViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuarkWebViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F5358E1FCBEA9400ED0060 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66F5358F1FCBEA9400ED0060 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -136,6 +142,10 @@
 				66F5359D1FCBEA9400ED0060 /* main.m */,
 				66C33EBC1FCBF3C7006357F7 /* QuarkWebViewController.h */,
 				66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */,
+				66C33EC91FCC43E4006357F7 /* SonicJSContext.h */,
+				66C33EC81FCC43E4006357F7 /* SonicJSContext.m */,
+				66C33ECC1FCC4428006357F7 /* SonicOfflineCacheConnection.h */,
+				66C33ECD1FCC4428006357F7 /* SonicOfflineCacheConnection.m */,
 			);
 			path = QuarkWebViewController;
 			sourceTree = "<group>";
@@ -342,6 +352,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				66C33EBE1FCBF3C7006357F7 /* QuarkWebViewController.m in Sources */,
+				66C33ECE1FCC4428006357F7 /* SonicOfflineCacheConnection.m in Sources */,
+				66C33ECB1FCC43E4006357F7 /* SonicJSContext.m in Sources */,
 				66F535931FCBEA9400ED0060 /* ViewController.m in Sources */,
 				66F5359E1FCBEA9400ED0060 /* main.m in Sources */,
 				66F535901FCBEA9400ED0060 /* AppDelegate.m in Sources */,

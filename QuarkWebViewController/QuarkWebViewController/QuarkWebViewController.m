@@ -8,10 +8,8 @@
 
 #import "QuarkWebViewController.h"
 #import <WebKit/WebKit.h>
-//#import <NJKWebViewProgress.h>
-//#import <Sonic.h>
-//#import <SonicEngine.h>
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
+#import "SonicJSContext.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -25,6 +23,7 @@
 @property (nonatomic, strong) NJKWebViewProgress *uiwebViewProgress;
 @property (nonatomic, strong) WKWebViewConfiguration *wkConfig;
 @property (nonatomic, strong) NSString *url;
+@property (nonatomic,strong)SonicJSContext *sonicContext;
 
 @end
 
@@ -36,6 +35,7 @@
         self.webViewType = webViewType;
         self.url = url;
 //        self.view.backgroundColor = [UIColor whiteColor];
+        self.clickTime = (long long)([[NSDate date]timeIntervalSince1970]*1000);
         switch (self.webViewType) {
             case JPWebViewTypeUIWebView:
             {
@@ -107,6 +107,10 @@
 
 - (void)dealloc
 {
+    self.sonicContext.owner = nil;
+    self.sonicContext = nil;
+    self.jscontext = nil;
+    [[SonicEngine sharedEngine] removeSessionWithWebDelegate:self];
     if (_wkWebView) {
         [self.currentWebView removeObserver:self forKeyPath:@"estimatedProgress"];
     }
