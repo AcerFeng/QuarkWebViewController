@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		66F535901FCBEA9400ED0060 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5358F1FCBEA9400ED0060 /* AppDelegate.m */; };
 		66F535931FCBEA9400ED0060 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F535921FCBEA9400ED0060 /* ViewController.m */; };
-		66F535961FCBEA9400ED0060 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F535941FCBEA9400ED0060 /* Main.storyboard */; };
 		66F535981FCBEA9400ED0060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F535971FCBEA9400ED0060 /* Assets.xcassets */; };
 		66F5359B1FCBEA9400ED0060 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66F535991FCBEA9400ED0060 /* LaunchScreen.storyboard */; };
 		66F5359E1FCBEA9400ED0060 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5359D1FCBEA9400ED0060 /* main.m */; };
@@ -42,7 +41,6 @@
 		66F5358F1FCBEA9400ED0060 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		66F535911FCBEA9400ED0060 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		66F535921FCBEA9400ED0060 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		66F535951FCBEA9400ED0060 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		66F535971FCBEA9400ED0060 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66F5359A1FCBEA9400ED0060 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		66F5359C1FCBEA9400ED0060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -129,7 +127,6 @@
 				66F5358F1FCBEA9400ED0060 /* AppDelegate.m */,
 				66F535911FCBEA9400ED0060 /* ViewController.h */,
 				66F535921FCBEA9400ED0060 /* ViewController.m */,
-				66F535941FCBEA9400ED0060 /* Main.storyboard */,
 				66F535971FCBEA9400ED0060 /* Assets.xcassets */,
 				66F535991FCBEA9400ED0060 /* LaunchScreen.storyboard */,
 				66F5359C1FCBEA9400ED0060 /* Info.plist */,
@@ -267,7 +264,6 @@
 			files = (
 				66F5359B1FCBEA9400ED0060 /* LaunchScreen.storyboard in Resources */,
 				66F535981FCBEA9400ED0060 /* Assets.xcassets in Resources */,
-				66F535961FCBEA9400ED0060 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -378,14 +374,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		66F535941FCBEA9400ED0060 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				66F535951FCBEA9400ED0060 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		66F535991FCBEA9400ED0060 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -508,7 +496,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QuarkWebViewController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lanfeng.www.QuarkWebViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -523,7 +511,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = QuarkWebViewController/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.lanfeng.www.QuarkWebViewController;
 				PRODUCT_NAME = "$(TARGET_NAME)";
