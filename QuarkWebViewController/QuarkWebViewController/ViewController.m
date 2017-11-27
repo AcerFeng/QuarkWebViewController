@@ -70,7 +70,7 @@ static const CGFloat kButtonWidth = 250;
     [self.navigationController pushViewController:[[QuarkWebViewController alloc] initWith:JPWebViewTypeWKWebView url:self.inputTextField.text] animated:YES];
 }
 - (void)toSonikWebView:(UIButton *)button {
-    
+    [self.navigationController pushViewController:[[QuarkWebViewController alloc] initWith:JPWebViewTypeSonicWebView url:self.inputTextField.text] animated:YES];
 }
 
 #pragma mark - getters and setters

@@ -27,19 +27,22 @@ PODS:
   - ReactiveCocoa/no-arc (2.5)
   - ReactiveCocoa/UI (2.5):
     - ReactiveCocoa/Core
+  - VasSonic (2.0.0-beta)
 
 DEPENDENCIES:
   - AFNetworking (= 3.1.0)
   - Masonry
   - NJKWebViewProgress
   - ReactiveCocoa (= 2.5)
+  - VasSonic (= 2.0.0-beta)
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Masonry: 7c429b56da9d4ee0bbb3ed77a5ea710d6a5df39e
   NJKWebViewProgress: f481fd424cb5ecc27eacae11b5397db92fba9a4d
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
+  VasSonic: 977273d73006ecda36ee03736b3bb82d1e4f4336
 
-PODFILE CHECKSUM: a6291ba32e5c18890089fc9dcef7a1d1044ce6ac
+PODFILE CHECKSUM: f2fa4a5ad0c32308ac2cae2328e8b7a8e752b7c4
 
 COCOAPODS: 1.1.1

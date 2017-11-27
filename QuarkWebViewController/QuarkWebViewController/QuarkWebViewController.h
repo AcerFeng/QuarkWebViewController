@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
 typedef  NS_ENUM(NSInteger , JPWebViewType){
     JPWebViewTypeUIWebView,

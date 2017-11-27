@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
+#import <Sonic.h>
 
 @interface AppDelegate ()
 
@@ -18,9 +19,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [NSURLProtocol registerClass:[SonicURLProtocol class]];
     self.window = [[UIWindow alloc] init];
     self.window.frame = [UIScreen mainScreen].bounds;
     [self.window makeKeyAndVisible];
+    //start web thread
+    UIWebView *webPool = [[UIWebView alloc]initWithFrame:CGRectZero];
+    [webPool loadHTMLString:@"" baseURL:nil];
     
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[ViewController alloc] init]];
     self.window.rootViewController = nav;

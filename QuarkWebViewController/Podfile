@@ -1,13 +1,16 @@
 # Uncomment this line to define a global platform for your project
+source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 inhibit_all_warnings!
 
 target 'QuarkWebViewController' do
 
+pod 'VasSonic', '2.0.0-beta'
 pod "AFNetworking", "3.1.0"
 pod "ReactiveCocoa", "2.5"
 pod 'Masonry'
 pod 'NJKWebViewProgress'
+
 
 end
 

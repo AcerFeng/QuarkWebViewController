@@ -9,11 +9,13 @@
 #import "QuarkWebViewController.h"
 #import <WebKit/WebKit.h>
 #import <NJKWebViewProgress.h>
+#import <Sonic.h>
+#import <SonicEngine.h>
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
 
-@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate>
+@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate, SonicSessionDelegate>
 @property (nonatomic, strong) UIView *currentWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) WKWebView *wkWebView;
@@ -22,15 +24,17 @@
 @property (nonatomic, strong) NJKWebViewProgress *uiwebViewProgress;
 @property (nonatomic, strong) WKWebViewConfiguration *wkConfig;
 @property (nonatomic, strong) NSString *url;
+
 @end
 
 @implementation QuarkWebViewController
 #pragma mark - lifecycle
 - (instancetype)initWith:(JPWebViewType)webViewType url:(NSString *)url {
     if (self = [super init]) {
+        url = url.length ? url : @"http://mc.vip.qq.com/demo/indexv2";
         self.webViewType = webViewType;
         self.url = url;
-        self.view.backgroundColor = [UIColor whiteColor];
+//        self.view.backgroundColor = [UIColor whiteColor];
         switch (self.webViewType) {
             case JPWebViewTypeUIWebView:
             {
@@ -45,18 +49,54 @@
             }
                 break;
             case JPWebViewTypeSonicWebView:
-            {}
+            {
+                self.currentWebView = self.uiWebView;
+                [[SonicEngine sharedEngine] createSessionWithUrl:self.url withWebDelegate:self];
+            }
                 break;
             default:
                 self.currentWebView = self.uiWebView;
         }
         [self.view addSubview:self.currentWebView];
-        [self.view addSubview:self.progressView];
+//        [self.view addSubview:self.progressView];
         
         [self LF_setupSubviews];
         [self startLoad];
     }
     return self;
+}
+
+- (void)loadView
+{
+    [super loadView];
+    
+//    NSString *urlString = @"http://mc.vip.qq.com/demo/indexv2";
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.url]];
+    request.timeoutInterval = 15.0f;
+    //    [self.wkWebView loadRequest:request];
+    switch (self.webViewType) {
+        case JPWebViewTypeUIWebView:
+        {
+            [self.uiWebView loadRequest:request];
+        }
+            break;
+        case JPWebViewTypeWKWebView:
+        {
+            [self.wkWebView loadRequest:request];
+        }
+            break;
+        case JPWebViewTypeSonicWebView:
+        {
+            NSLog(@"索尼克");
+            SonicSession* session = [[SonicEngine sharedEngine] sessionWithWebDelegate:self];
+            if (session) {
+                [self.uiWebView loadRequest:[SonicUtil sonicWebRequestWithSession:session withOrigin:request]];
+            }else{
+                [self.uiWebView loadRequest:request];
+            }
+        }
+            break;
+    }
 }
 
 - (void)viewDidLoad {
@@ -77,25 +117,7 @@
 }
 
 - (void)startLoad {
-    NSString *urlString = @"http://www.baidu.com";
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
-    request.timeoutInterval = 15.0f;
-//    [self.wkWebView loadRequest:request];
-    switch (self.webViewType) {
-        case JPWebViewTypeUIWebView:
-        {
-            [self.uiWebView loadRequest:request];
-        }
-            break;
-        case JPWebViewTypeWKWebView:
-        {
-            [self.wkWebView loadRequest:request];
-        }
-            break;
-        case JPWebViewTypeSonicWebView:
-        {}
-            break;
-    }
+    
 }
 
 #pragma mark - observer
@@ -166,26 +188,42 @@
 
 #pragma mark - UIWebViewDelegate
 // 网页开始加载的时候调用
-- (void)webViewDidStartLoad:(UIWebView *)webView {
-    NSLog(@"开始加载网页");
-    self.progressView.hidden = NO;
-    [self.view bringSubviewToFront:self.progressView];
-}
-
-// 网页加载完成的时候调用
-- (void)webViewDidFinishLoad:(UIWebView *)webView {
-    NSLog(@"加载完成");
-}
-
-// 网页加载出错的时候调用
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"加载失败");
-}
+//- (void)webViewDidStartLoad:(UIWebView *)webView {
+//    NSLog(@"开始加载网页");
+//    self.progressView.hidden = NO;
+//    [self.view bringSubviewToFront:self.progressView];
+//}
+//
+//// 网页加载完成的时候调用
+//- (void)webViewDidFinishLoad:(UIWebView *)webView {
+//    NSLog(@"加载完成");
+//}
+//
+//// 网页加载出错的时候调用
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+//    NSLog(@"加载失败");
+//}
 
 // 网页中的每一个请求都会被触发这个方法，返回NO代表不执行这个请求(常用于JS与iOS之间通讯)
 //- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType {
 //
 //}
+
+#pragma mark - Sonic Session Delegate
+/*
+ * Call back when Sonic will send request.
+ */
+- (void)sessionWillRequest:(SonicSession *)session
+{
+    //This callback can be used to set some information, such as cookie and UA.
+}
+/*
+ * Call back when Sonic require WebView to reload, e.g template changed or error occurred.
+ */
+- (void)session:(SonicSession *)session requireWebViewReload:(NSURLRequest *)request
+{
+    [self.uiWebView loadRequest:request];
+}
 
 #pragma mark - NJKWebViewProgress
 -(void)webViewProgress:(NJKWebViewProgress *)webViewProgress updateProgress:(float)progress
@@ -208,6 +246,8 @@
 - (UIWebView *)uiWebView {
     if (!_uiWebView) {
         _uiWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, 64, kScreenWidth, kScreenHeight)];
+        _uiWebView.delegate = self;
+        _uiWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     }
     return _uiWebView;
 }
