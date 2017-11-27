@@ -15,6 +15,7 @@ typedef  NS_ENUM(NSInteger , JPWebViewType){
     JPWebViewTypeSonicWebView
 };
 
+@import VasSonic;
 @interface QuarkWebViewController : UIViewController
 - (instancetype)initWith:(JPWebViewType)webViewType url:(NSString *)url;
 @end

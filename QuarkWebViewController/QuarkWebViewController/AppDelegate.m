@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ViewController.h"
-#import <Sonic.h>
+@import VasSonic;
 
 @interface AppDelegate ()
 

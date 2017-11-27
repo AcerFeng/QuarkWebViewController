@@ -8,9 +8,10 @@
 
 #import "QuarkWebViewController.h"
 #import <WebKit/WebKit.h>
-#import <NJKWebViewProgress.h>
-#import <Sonic.h>
-#import <SonicEngine.h>
+//#import <NJKWebViewProgress.h>
+//#import <Sonic.h>
+//#import <SonicEngine.h>
+#import <NJKWebViewProgress/NJKWebViewProgress.h>
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height

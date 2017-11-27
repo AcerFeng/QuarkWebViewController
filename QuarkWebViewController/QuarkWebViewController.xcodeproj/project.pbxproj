@@ -15,7 +15,7 @@
 		66F5359E1FCBEA9400ED0060 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5359D1FCBEA9400ED0060 /* main.m */; };
 		66F535A81FCBEA9400ED0060 /* QuarkWebViewControllerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F535A71FCBEA9400ED0060 /* QuarkWebViewControllerTests.m */; };
 		66F535B31FCBEA9400ED0060 /* QuarkWebViewControllerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F535B21FCBEA9400ED0060 /* QuarkWebViewControllerUITests.m */; };
-		D39D12A61EC55613E998AC54 /* libPods-QuarkWebViewController.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A169210C9B78BA388EECBCA /* libPods-QuarkWebViewController.a */; };
+		FEC1F686758D870BF76FCABC /* Pods_QuarkWebViewController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37DC5745FF85332993F338C9 /* Pods_QuarkWebViewController.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		27A19EA74320CA67EAC2D469 /* Pods-QuarkWebViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuarkWebViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuarkWebViewController/Pods-QuarkWebViewController.release.xcconfig"; sourceTree = "<group>"; };
+		37DC5745FF85332993F338C9 /* Pods_QuarkWebViewController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuarkWebViewController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		66C33EBC1FCBF3C7006357F7 /* QuarkWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuarkWebViewController.h; sourceTree = "<group>"; };
 		66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuarkWebViewController.m; sourceTree = "<group>"; };
 		66F5358B1FCBEA9400ED0060 /* QuarkWebViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuarkWebViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +55,6 @@
 		66F535AE1FCBEA9400ED0060 /* QuarkWebViewControllerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuarkWebViewControllerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F535B21FCBEA9400ED0060 /* QuarkWebViewControllerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuarkWebViewControllerUITests.m; sourceTree = "<group>"; };
 		66F535B41FCBEA9400ED0060 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6A169210C9B78BA388EECBCA /* libPods-QuarkWebViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-QuarkWebViewController.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AC8C93FD083ED82AC5D5404 /* Pods-QuarkWebViewController.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuarkWebViewController.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QuarkWebViewController/Pods-QuarkWebViewController.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -63,7 +63,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39D12A61EC55613E998AC54 /* libPods-QuarkWebViewController.a in Frameworks */,
+				FEC1F686758D870BF76FCABC /* Pods_QuarkWebViewController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,7 +87,7 @@
 		247D0D86C6700105BFE8DF62 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6A169210C9B78BA388EECBCA /* libPods-QuarkWebViewController.a */,
+				37DC5745FF85332993F338C9 /* Pods_QuarkWebViewController.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

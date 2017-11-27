@@ -1,0 +1,6 @@
+framework module Pods_QuarkWebViewController {
+  umbrella header "Pods-QuarkWebViewController-umbrella.h"
+
+  export *
+  module * { export * }
+}
