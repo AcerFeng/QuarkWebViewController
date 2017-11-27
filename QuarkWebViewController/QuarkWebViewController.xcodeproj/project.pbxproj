@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		66C33EBE1FCBF3C7006357F7 /* QuarkWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */; };
 		66F535901FCBEA9400ED0060 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F5358F1FCBEA9400ED0060 /* AppDelegate.m */; };
 		66F535931FCBEA9400ED0060 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 66F535921FCBEA9400ED0060 /* ViewController.m */; };
 		66F535981FCBEA9400ED0060 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66F535971FCBEA9400ED0060 /* Assets.xcassets */; };
@@ -36,6 +37,8 @@
 
 /* Begin PBXFileReference section */
 		27A19EA74320CA67EAC2D469 /* Pods-QuarkWebViewController.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuarkWebViewController.release.xcconfig"; path = "Pods/Target Support Files/Pods-QuarkWebViewController/Pods-QuarkWebViewController.release.xcconfig"; sourceTree = "<group>"; };
+		66C33EBC1FCBF3C7006357F7 /* QuarkWebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuarkWebViewController.h; sourceTree = "<group>"; };
+		66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuarkWebViewController.m; sourceTree = "<group>"; };
 		66F5358B1FCBEA9400ED0060 /* QuarkWebViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuarkWebViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		66F5358E1FCBEA9400ED0060 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		66F5358F1FCBEA9400ED0060 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 				66F535991FCBEA9400ED0060 /* LaunchScreen.storyboard */,
 				66F5359C1FCBEA9400ED0060 /* Info.plist */,
 				66F5359D1FCBEA9400ED0060 /* main.m */,
+				66C33EBC1FCBF3C7006357F7 /* QuarkWebViewController.h */,
+				66C33EBD1FCBF3C7006357F7 /* QuarkWebViewController.m */,
 			);
 			path = QuarkWebViewController;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				66C33EBE1FCBF3C7006357F7 /* QuarkWebViewController.m in Sources */,
 				66F535931FCBEA9400ED0060 /* ViewController.m in Sources */,
 				66F5359E1FCBEA9400ED0060 /* main.m in Sources */,
 				66F535901FCBEA9400ED0060 /* AppDelegate.m in Sources */,

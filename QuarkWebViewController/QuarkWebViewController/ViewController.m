@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import <Masonry.h>
+#import "QuarkWebViewController.h"
 
 static const CGFloat kMargin = 12.0;
 static const CGFloat kButtonWidth = 250;
@@ -53,7 +54,6 @@ static const CGFloat kButtonWidth = 250;
         make.height.equalTo(@44);
     }];
 
-    
     [self.sonicwebViewButton mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.inputTextField);
         make.top.equalTo(self.wkwebViewButton.mas_bottom).offset(kMargin);
@@ -64,10 +64,10 @@ static const CGFloat kButtonWidth = 250;
 
 #pragma mark - event response
 - (void)toUIWebView:(UIButton *)button {
-    
+    [self.navigationController pushViewController:[[QuarkWebViewController alloc] initWith:JPWebViewTypeUIWebView url:self.inputTextField.text] animated:YES];
 }
 - (void)toWKWebView:(UIButton *)button {
-    
+    [self.navigationController pushViewController:[[QuarkWebViewController alloc] initWith:JPWebViewTypeWKWebView url:self.inputTextField.text] animated:YES];
 }
 - (void)toSonikWebView:(UIButton *)button {
     
