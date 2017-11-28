@@ -10,6 +10,7 @@
 #import <WebKit/WebKit.h>
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 #import "SonicJSContext.h"
+#import "QuarkToolView.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -27,6 +28,7 @@
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) WKWebView *wkWebView;
 @property (nonatomic, strong) UIProgressView *progressView;
+@property (nonatomic, strong) QuarkToolView *toolView;
 @property (nonatomic, assign) JPWebViewType webViewType;
 @property (nonatomic, strong) NJKWebViewProgress *uiwebViewProgress;
 @property (nonatomic, strong) WKWebViewConfiguration *wkConfig;
@@ -69,6 +71,7 @@
         }
         [self.view addSubview:self.currentWebView];
         [self.view addSubview:self.progressView];
+        [self.view addSubview:self.toolView];
     }
     return self;
 }
@@ -299,6 +302,13 @@
         _uiwebViewProgress.progressDelegate = self;
     }
     return _uiwebViewProgress;
+}
+
+- (QuarkToolView *)toolView {
+    if (!_toolView) {
+        _toolView = [[QuarkToolView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 44)];
+    }
+    return _toolView;
 }
 
 @end
