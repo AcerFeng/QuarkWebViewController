@@ -23,7 +23,9 @@
 #define kIPhoneXBottom 34
 #define IPHONEX_SafeArea_HEIGHT 734
 
-@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate, SonicSessionDelegate, UIGestureRecognizerDelegate>
+static const CGFloat kToolViewHeight = 44.0;
+
+@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate, SonicSessionDelegate, UIGestureRecognizerDelegate, QuarkToolViewDelegate>
 @property (nonatomic, strong) UIView *currentWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) WKWebView *wkWebView;
@@ -158,11 +160,6 @@
     if ([keyPath isEqualToString:@"estimatedProgress"]) {
         self.progressView.progress = self.wkWebView.estimatedProgress;
         if (self.progressView.progress == 1) {
-            /*
-             *添加一个简单的动画，将progressView的Height变为1.4倍，在开始加载网页的代理中会恢复为1.5倍
-             *动画时长0.25s，延时0.3s后开始动画
-             *动画结束后将progressView隐藏
-             */
             __weak typeof (self)weakSelf = self;
             [UIView animateWithDuration:0.25f delay:0.3f options:UIViewAnimationOptionCurveEaseOut animations:^{
 //                weakSelf.progressView.transform = CGAffineTransformMakeScale(1.0f, 1.4f);
@@ -256,12 +253,29 @@
     }
 }
 
+#pragma mark - QuarkToolViewDelegate
+- (void)quarkToolView:(QuarkToolView *)toolView backButtonClick:(UIButton *)button {
+    
+}
+
+- (void)quarkToolView:(QuarkToolView *)toolView menuButtonClick:(UIButton *)button {
+    
+}
+
+- (void)quarkToolView:(QuarkToolView *)toolView titleButtonClick:(UIButton *)button {
+    
+}
+
+- (void)quarkToolView:(QuarkToolView *)toolView titleButtonDoubleClick:(UIButton *)button {
+    
+}
 
 
 #pragma mark - getters and setters
 - (UIWebView *)uiWebView {
     if (!_uiWebView) {
-        _uiWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH)];
+        _uiWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewHeight)];
+        _uiWebView.backgroundColor = [UIColor whiteColor];
         _uiWebView.delegate = self;
         _uiWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     }
@@ -270,7 +284,8 @@
 
 - (WKWebView *)wkWebView {
     if (!_wkWebView) {
-        _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH) configuration:self.wkConfig];
+        _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewHeight) configuration:self.wkConfig];
+        _wkWebView.backgroundColor = [UIColor whiteColor];
         _wkWebView.navigationDelegate = self;
         _wkWebView.UIDelegate = self;
     }
@@ -307,6 +322,7 @@
 - (QuarkToolView *)toolView {
     if (!_toolView) {
         _toolView = [[QuarkToolView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 44)];
+        _toolView.delegate = self;
     }
     return _toolView;
 }
