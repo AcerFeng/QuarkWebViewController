@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *menuButton;
 @property (nonatomic, strong) UIButton *titleButton;
+@property (nonatomic, strong) UIView *lineView;
 @end
 
 @implementation QuarkToolView
@@ -29,6 +30,7 @@
         [self addSubview:self.backButton];
         [self addSubview:self.menuButton];
         [self addSubview:self.titleButton];
+        [self addSubview:self.lineView];
     }
     return self;
 }
@@ -77,6 +79,14 @@
 - (void)setTitle:(NSString *)title {
     _title = title;
     [self.titleButton setTitle:title forState:UIControlStateNormal];
+}
+
+- (UIView *)lineView {
+    if (!_lineView) {
+        _lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, kScreenWidth, 0.5)];
+        _lineView.backgroundColor = [UIColor grayColor];
+    }
+    return _lineView;
 }
 
 - (UIButton *)backButton {
