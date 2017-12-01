@@ -11,6 +11,7 @@
 #import <NJKWebViewProgress/NJKWebViewProgress.h>
 #import "SonicJSContext.h"
 #import "QuarkToolView.h"
+#import "UIView+LFExtension.h"
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -139,7 +140,6 @@ static const CGFloat kToolViewHeight = 44.0;
     }
 #endif
     self.view.backgroundColor = [UIColor whiteColor];
-    // Do any additional setup after loading the view.
 }
 
 - (void)dealloc
@@ -241,7 +241,7 @@ static const CGFloat kToolViewHeight = 44.0;
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSLog(@"加载失败");
     //加载失败同样需要隐藏progressView
-    //self.progressView.hidden = YES;
+    self.progressView.hidden = YES;
 }
 
 #pragma mark - UIWebViewDelegate
@@ -257,6 +257,7 @@ static const CGFloat kToolViewHeight = 44.0;
     NSLog(@"加载完成");
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.toolView.title = title;
+    self.progressView.hidden = YES;
 }
 
 // 网页加载出错的时候调用
@@ -264,6 +265,7 @@ static const CGFloat kToolViewHeight = 44.0;
     NSLog(@"加载失败");
     NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
     self.toolView.title = title;
+    self.progressView.hidden = YES;
 }
 
 // 网页中的每一个请求都会被触发这个方法，返回NO代表不执行这个请求(常用于JS与iOS之间通讯)
@@ -352,8 +354,9 @@ static const CGFloat kToolViewHeight = 44.0;
 
 - (UIProgressView *)progressView {
     if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, 2)];
-        _progressView.backgroundColor = [UIColor blueColor];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 2)];
+        _progressView.progressTintColor = [UIColor blueColor];
+        _progressView.trackTintColor=[UIColor clearColor];
 //        _progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
     }
     return _progressView;
