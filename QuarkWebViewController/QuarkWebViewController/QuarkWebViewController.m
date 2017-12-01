@@ -59,6 +59,7 @@ static const CGFloat kToolViewHeight = 44.0;
             {
                 self.currentWebView = self.wkWebView;
                 [self.currentWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
+                [self.currentWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
             }
                 break;
             case JPWebViewTypeSonicWebView:
@@ -150,10 +151,46 @@ static const CGFloat kToolViewHeight = 44.0;
     [[SonicEngine sharedEngine] removeSessionWithWebDelegate:self];
     if (_wkWebView) {
         [self.currentWebView removeObserver:self forKeyPath:@"estimatedProgress"];
+        [self.currentWebView removeObserver:self forKeyPath:@"title"];
     }
 }
 
 #pragma mark private methods
+- (void)LF_goBackAction {
+    if (_uiWebView) {
+        if ([_uiWebView canGoBack]) {
+            [_uiWebView goBack];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    } else if (_wkWebView) {
+        if ([_wkWebView canGoBack]) {
+            [_wkWebView goBack];
+        } else {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
+}
+
+- (void)LF_refreshAction {
+    if (_uiWebView) {
+        [_uiWebView reload];
+    } else if (_wkWebView) {
+        [_wkWebView reload];
+    }
+}
+
+- (void)LF_goForwardAction {
+    if (_uiWebView) {
+        if ([_uiWebView canGoForward]) {
+            [_uiWebView goForward];
+        }
+    } else if (_wkWebView) {
+        if ([_wkWebView canGoForward]) {
+            [_wkWebView goForward];
+        }
+    }
+}
 
 #pragma mark - observer
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context {
@@ -168,7 +205,13 @@ static const CGFloat kToolViewHeight = 44.0;
                 
             }];
         }
-    }else{
+    } else if ([keyPath isEqualToString:@"title"]) {
+        if (object == _wkWebView) {
+            self.toolView.title = self.wkWebView.title;
+        } else {
+            [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+        }
+    } else {
         [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
     }
 }
@@ -190,6 +233,8 @@ static const CGFloat kToolViewHeight = 44.0;
     NSLog(@"加载完成");
     //加载完成后隐藏progressView
     //self.progressView.hidden = YES;
+//    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+//    self.toolView.title = title;
 }
 
 //加载失败
@@ -210,11 +255,15 @@ static const CGFloat kToolViewHeight = 44.0;
 // 网页加载完成的时候调用
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
     NSLog(@"加载完成");
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.toolView.title = title;
 }
 
 // 网页加载出错的时候调用
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"加载失败");
+    NSString *title = [webView stringByEvaluatingJavaScriptFromString:@"document.title"];
+    self.toolView.title = title;
 }
 
 // 网页中的每一个请求都会被触发这个方法，返回NO代表不执行这个请求(常用于JS与iOS之间通讯)
@@ -255,7 +304,7 @@ static const CGFloat kToolViewHeight = 44.0;
 
 #pragma mark - QuarkToolViewDelegate
 - (void)quarkToolView:(QuarkToolView *)toolView backButtonClick:(UIButton *)button {
-    
+    [self LF_goBackAction];
 }
 
 - (void)quarkToolView:(QuarkToolView *)toolView menuButtonClick:(UIButton *)button {
