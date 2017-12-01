@@ -11,6 +11,9 @@
 
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
+#define kMargin 15
+#define kButtonWidth 44
+#define kTitleWidth (kScreenWidth - kButtonWidth*2 - kMargin*4)
 
 @interface QuarkToolView()
 @property (nonatomic, strong) UIButton *backButton;
@@ -79,7 +82,7 @@
 - (UIButton *)backButton {
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backButton.frame = CGRectMake(12, 0, 44, 44);
+        _backButton.frame = CGRectMake(kMargin, 0, kButtonWidth, kButtonWidth);
         [_backButton setImage:[UIImage imageNamed:@"back_icon"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -89,7 +92,7 @@
 - (UIButton *)menuButton {
     if (!_menuButton) {
         _menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _menuButton.frame = CGRectMake(kScreenWidth - 44 - 12, 0, 44, 44);
+        _menuButton.frame = CGRectMake(kScreenWidth - kButtonWidth - kMargin, 0, kButtonWidth, kButtonWidth);
         [_menuButton setImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
         [_menuButton addTarget:self action:@selector(menuClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -99,12 +102,12 @@
 - (UIButton *)titleButton {
     if (!_titleButton) {
         _titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _titleButton.frame = CGRectMake(0, 0, 44, 44);
+        _titleButton.frame = CGRectMake(0, 0, kTitleWidth, 44);
         _titleButton.center = CGPointMake(kScreenWidth/2, _titleButton.y + _titleButton.height/2);
         [_titleButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         _titleButton.titleLabel.font = [UIFont systemFontOfSize:13];
-        _titleButton.backgroundColor = [UIColor redColor];
-        [_titleButton setTitle:@"测试" forState:UIControlStateNormal];
+        [_titleButton.titleLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+        [_titleButton setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
         [_titleButton addTarget:self action:@selector(titleClick:) forControlEvents:UIControlEventTouchUpInside];
         [_titleButton addTarget:self action:@selector(titleRepeatClick:) forControlEvents:UIControlEventTouchDownRepeat];
     }
