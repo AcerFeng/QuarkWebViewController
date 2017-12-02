@@ -20,4 +20,6 @@
 @property (nonatomic, weak) id<QuarkToolViewDelegate> delegate;
 @property (nonatomic, strong) NSString *url;
 @property (nonatomic, strong) NSString *title;
+
+- (void)getHeiger:(BOOL)isHeiger;
 @end

@@ -25,8 +25,9 @@
 #define IPHONEX_SafeArea_HEIGHT 734
 
 static const CGFloat kToolViewHeight = 44.0;
+static const CGFloat kToolViewSecendHeight = 22;
 
-@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate, SonicSessionDelegate, UIGestureRecognizerDelegate, QuarkToolViewDelegate>
+@interface QuarkWebViewController ()<NJKWebViewProgressDelegate, UIWebViewDelegate, WKNavigationDelegate, WKUIDelegate, SonicSessionDelegate, UIGestureRecognizerDelegate, QuarkToolViewDelegate, UIScrollViewDelegate>
 @property (nonatomic, strong) UIView *currentWebView;
 @property (nonatomic, strong) UIWebView *uiWebView;
 @property (nonatomic, strong) WKWebView *wkWebView;
@@ -59,6 +60,7 @@ static const CGFloat kToolViewHeight = 44.0;
             case JPWebViewTypeWKWebView:
             {
                 self.currentWebView = self.wkWebView;
+                NSLog(@"%@", self.wkWebView.scrollView.delegate);
                 [self.currentWebView addObserver:self forKeyPath:@"estimatedProgress" options:NSKeyValueObservingOptionNew context:nil];
                 [self.currentWebView addObserver:self forKeyPath:@"title" options:NSKeyValueObservingOptionNew context:nil];
             }
@@ -67,6 +69,7 @@ static const CGFloat kToolViewHeight = 44.0;
             {
                 self.currentWebView = self.uiWebView;
                 self.uiWebView.delegate = self.uiwebViewProgress;
+                NSLog(@"%@", self.uiWebView.scrollView.delegate);
                 [[SonicEngine sharedEngine] createSessionWithUrl:self.url withWebDelegate:self];
             }
                 break;
@@ -149,6 +152,7 @@ static const CGFloat kToolViewHeight = 44.0;
     self.jscontext = nil;
     self.navPopGestureRecognizerDelegate = nil;
     [[SonicEngine sharedEngine] removeSessionWithWebDelegate:self];
+    
     if (_wkWebView) {
         [self.currentWebView removeObserver:self forKeyPath:@"estimatedProgress"];
         [self.currentWebView removeObserver:self forKeyPath:@"title"];
@@ -190,6 +194,21 @@ static const CGFloat kToolViewHeight = 44.0;
             [_wkWebView goForward];
         }
     }
+}
+
+- (void)LF_changeFrame {
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.toolView.height == kToolViewHeight) {
+            self.currentWebView.height = self.currentWebView.height + (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.y = self.toolView.y + (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.height = kToolViewSecendHeight;
+        } else {
+            self.currentWebView.height = self.currentWebView.height - (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.y = self.toolView.y - (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.height = kToolViewHeight;
+        }
+        
+    } completion:nil];
 }
 
 #pragma mark - observer
@@ -304,6 +323,18 @@ static const CGFloat kToolViewHeight = 44.0;
     }
 }
 
+#pragma mark - scrollViewDelegate
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.toolView.height == kToolViewHeight) {
+            self.currentWebView.height = self.currentWebView.height + (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.y = self.toolView.y + (kToolViewHeight - kToolViewSecendHeight);
+            self.toolView.height = kToolViewSecendHeight;
+            [self.toolView getHeiger:NO];
+        }
+    } completion:nil];
+}
+
 #pragma mark - QuarkToolViewDelegate
 - (void)quarkToolView:(QuarkToolView *)toolView backButtonClick:(UIButton *)button {
     [self LF_goBackAction];
@@ -314,7 +345,7 @@ static const CGFloat kToolViewHeight = 44.0;
 }
 
 - (void)quarkToolView:(QuarkToolView *)toolView titleButtonClick:(UIButton *)button {
-    
+    [self LF_changeFrame];
 }
 
 - (void)quarkToolView:(QuarkToolView *)toolView titleButtonDoubleClick:(UIButton *)button {
@@ -325,9 +356,10 @@ static const CGFloat kToolViewHeight = 44.0;
 #pragma mark - getters and setters
 - (UIWebView *)uiWebView {
     if (!_uiWebView) {
-        _uiWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewHeight)];
+        _uiWebView = [[UIWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewSecendHeight)];
         _uiWebView.backgroundColor = [UIColor whiteColor];
         _uiWebView.delegate = self;
+        _uiWebView.scrollView.delegate = self;
         _uiWebView.scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
     }
     return _uiWebView;
@@ -335,7 +367,7 @@ static const CGFloat kToolViewHeight = 44.0;
 
 - (WKWebView *)wkWebView {
     if (!_wkWebView) {
-        _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewHeight) configuration:self.wkConfig];
+        _wkWebView = [[WKWebView alloc] initWithFrame:CGRectMake(0, STATUSH, kScreenWidth, kScreenHeight - STATUSH - kToolViewSecendHeight) configuration:self.wkConfig];
         _wkWebView.backgroundColor = [UIColor whiteColor];
         _wkWebView.navigationDelegate = self;
         _wkWebView.UIDelegate = self;
@@ -354,7 +386,7 @@ static const CGFloat kToolViewHeight = 44.0;
 
 - (UIProgressView *)progressView {
     if (!_progressView) {
-        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 2)];
+        _progressView = [[UIProgressView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kToolViewSecendHeight, kScreenWidth, 1)];
         _progressView.progressTintColor = [UIColor blueColor];
         _progressView.trackTintColor=[UIColor clearColor];
 //        _progressView.transform = CGAffineTransformMakeScale(1.0f, 1.5f);
@@ -373,7 +405,7 @@ static const CGFloat kToolViewHeight = 44.0;
 
 - (QuarkToolView *)toolView {
     if (!_toolView) {
-        _toolView = [[QuarkToolView alloc] initWithFrame:CGRectMake(0, kScreenHeight - 44, kScreenWidth, 44)];
+        _toolView = [[QuarkToolView alloc] initWithFrame:CGRectMake(0, kScreenHeight - kToolViewSecendHeight, kScreenWidth, kToolViewSecendHeight)];
         _toolView.delegate = self;
     }
     return _toolView;

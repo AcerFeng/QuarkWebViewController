@@ -15,6 +15,9 @@
 #define kButtonWidth 44
 #define kTitleWidth (kScreenWidth - kButtonWidth*2 - kMargin*4)
 
+static const CGFloat kToolViewHeight = 44.0;
+static const CGFloat kToolViewSecendHeight = 22;
+
 @interface QuarkToolView()
 @property (nonatomic, strong) UIButton *backButton;
 @property (nonatomic, strong) UIButton *menuButton;
@@ -40,6 +43,28 @@
     
 }
 
+#pragma mark - public methods
+- (void)getHeiger:(BOOL)isHeiger {
+    if (!isHeiger) {
+        [self LF_low];
+    } else {
+        [self LF_heigher];
+    }
+}
+
+#pragma mark - private methods
+- (void)LF_heigher {
+    self.backButton.height = kToolViewHeight;
+    self.menuButton.height = kToolViewHeight;
+    self.titleButton.height = kToolViewHeight;
+}
+
+- (void)LF_low {
+    self.backButton.height = kToolViewSecendHeight;
+    self.menuButton.height = kToolViewSecendHeight;
+    self.titleButton.height = kToolViewSecendHeight;
+}
+
 #pragma mark - event response
 - (void)backClick:(UIButton *)button {
     if (_delegate && [_delegate respondsToSelector:@selector(quarkToolView:backButtonClick:)]) {
@@ -57,6 +82,14 @@
 
 - (void)tClick:(UIButton *)button {
     NSLog(@"单击");
+    [UIView animateWithDuration:0.3 animations:^{
+        if (self.height == kToolViewHeight) {
+            [self LF_low];
+        } else {
+            [self LF_heigher];
+        }
+    } completion:nil];
+    
     if (_delegate && [_delegate respondsToSelector:@selector(quarkToolView:titleButtonClick:)]) {
         [_delegate quarkToolView:self titleButtonClick:button];
     }
@@ -92,7 +125,7 @@
 - (UIButton *)backButton {
     if (!_backButton) {
         _backButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _backButton.frame = CGRectMake(kMargin, 0, kButtonWidth, kButtonWidth);
+        _backButton.frame = CGRectMake(kMargin, 0, kButtonWidth, kToolViewSecendHeight);
         [_backButton setImage:[UIImage imageNamed:@"back_icon"] forState:UIControlStateNormal];
         [_backButton addTarget:self action:@selector(backClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -102,7 +135,7 @@
 - (UIButton *)menuButton {
     if (!_menuButton) {
         _menuButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _menuButton.frame = CGRectMake(kScreenWidth - kButtonWidth - kMargin, 0, kButtonWidth, kButtonWidth);
+        _menuButton.frame = CGRectMake(kScreenWidth - kButtonWidth - kMargin, 0, kButtonWidth, kToolViewSecendHeight);
         [_menuButton setImage:[UIImage imageNamed:@"menu_icon"] forState:UIControlStateNormal];
         [_menuButton addTarget:self action:@selector(menuClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -112,7 +145,7 @@
 - (UIButton *)titleButton {
     if (!_titleButton) {
         _titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        _titleButton.frame = CGRectMake(0, 0, kTitleWidth, 44);
+        _titleButton.frame = CGRectMake(0, 0, kTitleWidth, kToolViewSecendHeight);
         _titleButton.center = CGPointMake(kScreenWidth/2, _titleButton.y + _titleButton.height/2);
         [_titleButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         _titleButton.titleLabel.font = [UIFont systemFontOfSize:13];
